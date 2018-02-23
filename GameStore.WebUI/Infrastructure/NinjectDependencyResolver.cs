@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using GameStore.Domain.Abstract;
-using GameStore.Domain.Entities;
 using System.Web.Mvc;
-using Moq;
 using Ninject;
 using GameStore.Domain.Concrete;
+using GameStore.Domain.Abstract;
+using System.Configuration;
 
 namespace GameStore.WebUI.Infrastructure
 {
@@ -32,6 +31,18 @@ namespace GameStore.WebUI.Infrastructure
         private void AddBindings()
         {
             kernel.Bind<IGameRepository>().To<EFGameRepository>();
+
+            // ConfigurationManager.AppSettings считывает указаный параметр из AppSettings в Web.config (корневой каталог)
+            EmailSettings emailSettings = new EmailSettings
+            {
+                WriteAsFile = bool.Parse(ConfigurationManager
+                    .AppSettings["Email.WriteAsFile"] ?? "false")
+            };
+
+            // Эта конструкция указывает на то что при инициализации конструктора EmailOrderProcessor
+            //   в параметр "settings" будет внедрен объект emailSettings.
+            kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>()
+                .WithConstructorArgument("settings", emailSettings);
         }
     }
 }
