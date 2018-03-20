@@ -28,5 +28,11 @@ namespace GameStore.Domain.Entities
         [Display(Name = "Цена (руб)")]
         [Range(0.01, double.MaxValue, ErrorMessage = "Пожалуйста, введите положительное значение для цены")]
         public decimal Price { get; set; }
+
+        [StringLength(500)]
+        public string ImagePath { get; set; }
+
+        [StringLength(50)]
+        public string ImageMimeType { get; set; }
     }
 }

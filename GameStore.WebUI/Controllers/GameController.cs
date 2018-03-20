@@ -41,5 +41,23 @@ namespace GameStore.WebUI.Controllers
             };
             return View(model);
         }
+
+        public FilePathResult GetImage(int gameId)
+        {
+            Game game = repository.Games
+                .FirstOrDefault(g => g.GameId == gameId);
+
+            if (game != null)
+            {
+                if (game.ImagePath != null)
+                    return File(game.ImagePath, game.ImageMimeType);
+                else
+                    return null;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }

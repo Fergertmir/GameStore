@@ -1,6 +1,24 @@
 ﻿@model GameStore.Domain.Entities.Game
 
 <div data-role="collapsible" data-collapsed="false" data-content-theme="c">
+    @if (Model.ImagePath != null)
+    {
+        <div class="pull-left" style="margin-right: 10px">
+            <img class="img-thumbnail" width="75" height="75"
+                 src="@Url.Action("GetImage", "Game",
+                 new { Model.GameId })" />
+        </div>
+    }
+    else
+    {
+        <div class="container pull-left form-control-static img-thumbnail" margin-right="10px"
+             width="75" height="75">
+            <h1 style="margin:0px;">
+                <span class="glyphicon glyphicon-picture"/>
+            </h1>
+        </div>
+    }
+
     <h2>@Model.Name</h2>
     <div>
         <div>
