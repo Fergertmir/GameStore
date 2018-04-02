@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using GameStore.Domain.Entities;
 using GameStore.Domain.Abstract;
+using GameStore.Domain.EF;
 
 namespace GameStore.Domain.Concrete
 {

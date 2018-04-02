@@ -1,7 +1,7 @@
 ﻿using GameStore.Domain.Entities;
 using System.Data.Entity;
 
-namespace GameStore.Domain.Concrete
+namespace GameStore.Domain.EF
 {
     class EFDbContext : DbContext
     {
